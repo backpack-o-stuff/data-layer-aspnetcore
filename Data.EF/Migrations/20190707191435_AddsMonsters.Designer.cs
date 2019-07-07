@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DL.Data.EF.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20190707182656_InitialMigration")]
-    partial class InitialMigration
+    [Migration("20190707191435_AddsMonsters")]
+    partial class AddsMonsters
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -17,7 +17,7 @@ namespace DL.Data.EF.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
 
-            modelBuilder.Entity("DL.ClientLayer.Models.Monster", b =>
+            modelBuilder.Entity("DL.Application.Domain.Monsters.Monster", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()

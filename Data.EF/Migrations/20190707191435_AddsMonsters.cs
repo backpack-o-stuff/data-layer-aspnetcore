@@ -2,7 +2,7 @@
 
 namespace DL.Data.EF.Migrations
 {
-    public partial class InitialMigration : Migration
+    public partial class AddsMonsters : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

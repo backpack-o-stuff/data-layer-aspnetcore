@@ -15,7 +15,7 @@ namespace DL.Data.EF.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
 
-            modelBuilder.Entity("DL.ClientLayer.Models.Monster", b =>
+            modelBuilder.Entity("DL.Application.Domain.Monsters.Monster", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
