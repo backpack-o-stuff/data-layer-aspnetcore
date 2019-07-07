@@ -22,7 +22,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ClientLayer\ClientLayer.csproj" />
-    <ProjectReference Include="..\Data\Data.EF.csproj" />
+    <ProjectReference Include="..\Data.EF\Data.EF.csproj" />
   </ItemGroup>
 
   <ItemGroup>
