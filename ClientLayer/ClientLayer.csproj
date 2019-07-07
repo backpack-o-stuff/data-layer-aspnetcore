@@ -3,6 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
     <AspNetCoreHostingModel>InProcess</AspNetCoreHostingModel>
+    <AssemblyName>DL.ClientLayer</AssemblyName>
+    <RootNamespace>DL.ClientLayer</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
