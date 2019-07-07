@@ -1,0 +1,9 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+    <AssemblyName>DL.Application</AssemblyName>
+    <RootNamespace>DL.Application</RootNamespace>
+  </PropertyGroup>
+
+</Project>
