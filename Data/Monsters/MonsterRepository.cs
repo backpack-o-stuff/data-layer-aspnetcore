@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using DL.Application.Domain.Monsters;
 using DL.Application.Monsters;
@@ -6,58 +7,39 @@ using DL.Data.Infrastructure;
 
 namespace DL.Data.Monsters
 {
-    public class MonsterRepository : IMonsterRepository
+    public class MonsterRepository : RepositoryBase<Monster>, IMonsterRepository
     {
-        private readonly IDbContextFactory _dbContextFactory;
-
         public MonsterRepository(IDbContextFactory dbContextFactory)
-        {
-            _dbContextFactory = dbContextFactory;
-        }
+            : base(dbContextFactory) {}
 
         public Monster Find(int id)
         {
-            using(var context = _dbContextFactory.For())
-            {
-                return context.Monsters.FirstOrDefault(x => x.Id == id);       
-            }
+            return Context().Monsters.FirstOrDefault(x => x.Id == id);       
         }
 
         public List<Monster> All()
         {
-            using(var context = _dbContextFactory.For())
-            {
-                return context.Monsters.ToList();
-            }
+            return Context().Monsters.ToList();
         }
 
         public Monster Add(Monster monster)
         {
-            using(var context = _dbContextFactory.For())
-            {
-                context.Monsters.Add(monster);       
-                context.SaveChanges();
-                return monster;
-            }
+            Context().Monsters.Add(monster);       
+            return monster;
         }
 
         public void Remove(int id)
         {
-            using(var context = _dbContextFactory.For())
-            {
-                var monster = context.Monsters.FirstOrDefault(x => x.Id == id);
-                context.Monsters.Remove(monster);       
-                context.SaveChanges();
-            }
+            var monster = Context().Monsters.FirstOrDefault(x => x.Id == id);
+            if(monster == null)
+                return;
+
+            Context().Monsters.Remove(monster);       
         }
 
         public void RemoveRange(List<Monster> monsters)
         {
-            using(var context = _dbContextFactory.For())
-            {
-                context.Monsters.RemoveRange(monsters);       
-                context.SaveChanges();
-            }
+            Context().Monsters.RemoveRange(monsters);       
         }
     }
 }

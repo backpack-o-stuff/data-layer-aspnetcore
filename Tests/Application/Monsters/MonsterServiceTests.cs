@@ -14,7 +14,11 @@ namespace DL.Tests.Application.Monsters
         public void AfterEach()
         {
             var repository = Resolve<IMonsterRepository>();
-            repository.RemoveRange(repository.All());
+            repository.Worker(() => 
+            {
+                repository.RemoveRange(repository.All());
+                repository.SaveChanges();
+            });
         }
 
         [TestMethod]
@@ -23,7 +27,11 @@ namespace DL.Tests.Application.Monsters
             Arrange(() =>
             {
                 var repository = Resolve<IMonsterRepository>();
-                repository.Add(new Monster { Name = "Rawrgnar", Power = 99 });
+                repository.Worker(() => 
+                {
+                    repository.Add(new Monster { Name = "Rawrgnar", Power = 99 });
+                    repository.SaveChanges();
+                });
             });
 
             var result = Act(() => SUT.Find(1));

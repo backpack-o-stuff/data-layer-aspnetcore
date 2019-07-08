@@ -1,9 +1,6 @@
-﻿// NOTE: Domain would not normally exist in the Application Layer. 
-// This is just simplicity sake of example.
-
-namespace DL.Application.Domain.Monsters
+﻿namespace DL.Application.Domain.Monsters
 {
-    public class Monster
+    public class Monster : IEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }

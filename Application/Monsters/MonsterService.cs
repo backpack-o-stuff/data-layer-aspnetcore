@@ -25,22 +25,42 @@ namespace DL.Application.Monsters
 
         public Monster Find(int id)
         {
-            return _monsterRepository.Find(id);
+            Monster entity = null;
+            _monsterRepository.Worker(() => 
+            {
+                entity = _monsterRepository.Find(id);
+            });
+            return entity;
         }
 
         public List<Monster> All()
         {
-            return _monsterRepository.All();
+            List<Monster> monsters = null;
+            _monsterRepository.Worker(() => 
+            {
+                monsters = _monsterRepository.All();
+            });
+            return monsters;
         }
 
         public Monster Add(Monster monster)
         {
-            return _monsterRepository.Add(monster);
+            Monster entity = null;
+            _monsterRepository.Worker(() => 
+            {
+                entity = _monsterRepository.Add(monster);
+                _monsterRepository.SaveChanges();
+            });
+            return entity;
         }
 
         public void Remove(int id)
         {
-            _monsterRepository.Remove(id);
+            _monsterRepository.Worker(() => 
+            {
+                _monsterRepository.Remove(id);
+                _monsterRepository.SaveChanges();
+            });
         }
     }
 }
