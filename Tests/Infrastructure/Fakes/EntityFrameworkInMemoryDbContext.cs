@@ -1,4 +1,4 @@
-﻿using DL.Data.EF.Infrastructure;
+﻿using DL.Data.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 
 namespace DL.Tests.Infrastructure.Fakes

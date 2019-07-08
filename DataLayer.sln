@@ -5,9 +5,9 @@ VisualStudioVersion = 15.0.28307.136
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ClientLayer", "ClientLayer\ClientLayer.csproj", "{F0F673D0-82A3-47B0-8D8B-2820EFE5B6AD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{611A8984-CD1C-43B4-A57A-6240B1A094E6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{611A8984-CD1C-43B4-A57A-6240B1A094E6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{CCFE5161-6D5A-4D15-B358-157C05830854}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Application", "Application\Application.csproj", "{CCFE5161-6D5A-4D15-B358-157C05830854}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RepositoryFiles", "RepositoryFiles", "{971A2419-3F57-4E57-84E4-2E34BCCF1963}"
 	ProjectSection(SolutionItems) = preProject
@@ -16,7 +16,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RepositoryFiles", "Reposito
 		README.md = README.md
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.EF", "Data.EF\Data.EF.csproj", "{E090F758-998A-4A5F-BDC9-D84740587AE3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{364C597A-1162-487F-B6D5-510740401F15}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,10 +36,10 @@ Global
 		{CCFE5161-6D5A-4D15-B358-157C05830854}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCFE5161-6D5A-4D15-B358-157C05830854}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCFE5161-6D5A-4D15-B358-157C05830854}.Release|Any CPU.Build.0 = Release|Any CPU
-		{E090F758-998A-4A5F-BDC9-D84740587AE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E090F758-998A-4A5F-BDC9-D84740587AE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E090F758-998A-4A5F-BDC9-D84740587AE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E090F758-998A-4A5F-BDC9-D84740587AE3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{364C597A-1162-487F-B6D5-510740401F15}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{364C597A-1162-487F-B6D5-510740401F15}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{364C597A-1162-487F-B6D5-510740401F15}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{364C597A-1162-487F-B6D5-510740401F15}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

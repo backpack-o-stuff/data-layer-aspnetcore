@@ -1,4 +1,4 @@
-﻿namespace DL.Data.EF.Infrastructure
+﻿namespace DL.Data.Infrastructure
 {
     public interface IDbContextFactory
     {

@@ -2,9 +2,9 @@
 using System.Linq;
 using DL.Application.Domain.Monsters;
 using DL.Application.Monsters;
-using DL.Data.EF.Infrastructure;
+using DL.Data.Infrastructure;
 
-namespace DL.Data.EF.Monsters
+namespace DL.Data.Monsters
 {
     public class MonsterRepository : IMonsterRepository
     {
@@ -27,7 +27,7 @@ namespace DL.Data.EF.Monsters
         {
             using(var context = _dbContextFactory.For())
             {
-                return context.Monsters.ToList();       
+                return context.Monsters.ToList();
             }
         }
 

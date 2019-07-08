@@ -10,7 +10,7 @@ namespace DL.ClientLayer.Infrastructure.IoC
         private static readonly Assembly[] AutoResolvedAssemblies = new []
         {
             Assembly.Load("DL.Application"),
-            Assembly.Load("DL.Data.EF"),
+            Assembly.Load("DL.Data"),
             Assembly.Load("DL.ClientLayer")
         };
 

@@ -1,7 +1,7 @@
 ﻿using DL.Application.Domain.Monsters;
 using Microsoft.EntityFrameworkCore;
 
-namespace DL.Data.EF.Monsters
+namespace DL.Data.Monsters
 {
     public static class MonsterModelBuilder
     {

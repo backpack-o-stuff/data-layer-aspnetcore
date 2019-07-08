@@ -1,4 +1,4 @@
-﻿using DL.Data.EF.Infrastructure;
+﻿using DL.Data.Infrastructure;
 
 namespace DL.Tests.Infrastructure.Fakes
 {

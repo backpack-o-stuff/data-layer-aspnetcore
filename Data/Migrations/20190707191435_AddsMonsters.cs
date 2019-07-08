@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace DL.Data.EF.Migrations
+namespace DL.Data.Migrations
 {
     public partial class AddsMonsters : Migration
     {
