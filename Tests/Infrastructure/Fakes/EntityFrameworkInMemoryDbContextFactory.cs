@@ -6,7 +6,7 @@ namespace DL.Tests.Infrastructure.Fakes
     {
         public ApplicationContext For()
         {
-            return new EntityFrameworkInMemoryDbContext();
+            return new EntityFrameworkInMemoryDbContext("DatabaseConnectionStringNotNeeded");
         }
     }
 }

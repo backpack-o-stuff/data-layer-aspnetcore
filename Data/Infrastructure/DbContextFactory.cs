@@ -1,4 +1,6 @@
-﻿namespace DL.Data.Infrastructure
+﻿using DL.Application.Infrastructure;
+
+namespace DL.Data.Infrastructure
 {
     public interface IDbContextFactory
     {
@@ -7,9 +9,19 @@
 
     public class DbContextFactory : IDbContextFactory
     {
+        private readonly ISettingsProvider _settingsProvider;
+
+        public DbContextFactory(
+            ISettingsProvider settingsProvider
+        )
+        {
+            _settingsProvider = settingsProvider;
+        }
+
         public ApplicationContext For()
         {
-            return new ApplicationContext();
+            var connectionString = _settingsProvider.DatabaseConnectionString();
+            return new ApplicationContext(connectionString);
         }
     }
 }

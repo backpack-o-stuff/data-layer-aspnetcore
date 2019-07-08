@@ -6,11 +6,16 @@ namespace DL.Data.Infrastructure
 {
     public class ApplicationContext : DbContext
     {
-        private const string DB_SOURCE = "../Data/entityframework-local.db";
+        private readonly string _databaseConnectionString;
+
+        public ApplicationContext(string databaseConnectionString)
+        {
+            _databaseConnectionString = databaseConnectionString;
+        }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite($"Data Source={ DB_SOURCE }");
+            optionsBuilder.UseSqlite(_databaseConnectionString);
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

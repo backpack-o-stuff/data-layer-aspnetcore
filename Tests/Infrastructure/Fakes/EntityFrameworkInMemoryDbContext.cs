@@ -11,5 +11,8 @@ namespace DL.Tests.Infrastructure.Fakes
         {
             optionsBuilder.UseInMemoryDatabase(DB_NAME);
         }
+
+        public EntityFrameworkInMemoryDbContext(string databaseConnectionString) 
+            : base(databaseConnectionString) {}
     }
 }
