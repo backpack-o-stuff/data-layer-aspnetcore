@@ -4,14 +4,14 @@ using DL.Data.Infrastructure;
 
 namespace DL.Data.Scoreboards
 {
-    public class ScoreboardRepository : RepositoryBase<Scoreboard>, IScoreboardRepository
+    public class ScoreboardRepository : RepositoryBase, IScoreboardRepository
     {
-        public ScoreboardRepository(IDbContextFactory dbContextFactory)
-            : base(dbContextFactory) {}
+        public ScoreboardRepository(IContextSessionProvider contextSessionProvider)
+            : base(contextSessionProvider) {}
             
         public Scoreboard FindComplete(int id)
         {
-            return FindBy(
+            return FindBy<Scoreboard>(
                 x => x.Id == id,
                 x => x.ScoreboardEntries);
         }

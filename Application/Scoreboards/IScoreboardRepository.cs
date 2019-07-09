@@ -1,9 +1,8 @@
 ﻿using DL.Application.Domain.Scoreboards;
-using DL.Application.Infrastructure;
 
 namespace DL.Application.Scoreboards
 {
-    public interface IScoreboardRepository : IRepositoryWorker
+    public interface IScoreboardRepository
     {
         Scoreboard FindComplete(int id);
         Scoreboard Add(Scoreboard scoreboard);

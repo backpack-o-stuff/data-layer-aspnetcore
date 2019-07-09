@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using DL.Application.Domain.Monsters;
-using DL.Application.Infrastructure;
 
 namespace DL.Application.Monsters
 {
-    public interface IMonsterRepository : IRepositoryWorker
+    public interface IMonsterRepository
     {
         Monster FindComplete(int id);
         List<Monster> All();

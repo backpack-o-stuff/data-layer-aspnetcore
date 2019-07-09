@@ -1,12 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
+using DL.Data.Infrastructure;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DL.ClientLayer.Infrastructure.IoC
 {
     public static class DependencyRegistrations
     {
+        private static IServiceProvider _serviceProvider;
         private static readonly Assembly[] AutoResolvedAssemblies = new []
         {
             Assembly.Load("DL.Application"),
@@ -33,8 +35,12 @@ namespace DL.ClientLayer.Infrastructure.IoC
         {
             var services = new ServiceCollection();
             RegisterResolvers(services);
+
             registerResolverOverrides.ForEach(register => register(services));
-            return services.BuildServiceProvider();
+
+            _serviceProvider = _serviceProvider 
+                ?? services.BuildServiceProvider();
+            return _serviceProvider;
         }
 
         private static void RegisterResolvers(IServiceCollection services)

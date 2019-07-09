@@ -2,7 +2,7 @@
 
 namespace DL.Application.Infrastructure
 {
-    public interface IRepositoryWorker
+    public interface IUnitOfWork
     {
         void Worker(Action work);
         void TransactionWorker(Action work);

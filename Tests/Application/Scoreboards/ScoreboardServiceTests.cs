@@ -1,5 +1,6 @@
 ﻿using System.Linq;
 using DL.Application.Domain.Monsters;
+using DL.Application.Infrastructure;
 using DL.Application.Monsters;
 using DL.Application.Scoreboards;
 using DL.Tests.Infrastructure.TestBases;
@@ -15,15 +16,14 @@ namespace DL.Tests.Application.Scoreboards
         [TestCleanup]
         public void AfterEach()
         {
+            var unitOfWork = Resolve<IUnitOfWork>();
             var scoreboardRepository = Resolve<IMonsterRepository>();
             var monsterRepository = Resolve<IMonsterRepository>();
-
-            scoreboardRepository.Worker(() => 
+            unitOfWork.Worker(() => 
             {
                 scoreboardRepository.RemoveRange(scoreboardRepository.All());
                 monsterRepository.RemoveRange(monsterRepository.All());
-
-                scoreboardRepository.SaveChanges();
+                unitOfWork.SaveChanges();
             });
         }
 
@@ -35,8 +35,9 @@ namespace DL.Tests.Application.Scoreboards
 
             Arrange(() =>
             {
+                var unitOfWork = Resolve<IUnitOfWork>();
                 var monsterRepo = Resolve<IMonsterRepository>();
-                monsterRepo.Worker(() => 
+                unitOfWork.Worker(() => 
                 {
                     var monster1 = monsterRepo.Add(new Monster { Name = "Rawrgnar", Power = 99 });
                     monsterId1 = monster1.Id;
@@ -44,7 +45,7 @@ namespace DL.Tests.Application.Scoreboards
                     var monster2 = monsterRepo.Add(new Monster { Name = "Grrtastic", Power = 42 });
                     monsterId2 = monster2.Id;
 
-                    monsterRepo.SaveChanges();
+                    unitOfWork.SaveChanges();
                 });
             });
 

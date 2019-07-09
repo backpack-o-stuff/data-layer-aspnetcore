@@ -1,4 +1,5 @@
 ﻿using DL.Application.Domain.Scoreboards;
+using DL.Application.Infrastructure;
 using DL.Application.Monsters;
 
 namespace DL.Application.Scoreboards
@@ -10,14 +11,17 @@ namespace DL.Application.Scoreboards
 
     public class ScoreboardService : IScoreboardService
     {
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IScoreboardRepository _scoreboardRepository;
         private readonly IMonsterRepository _monsterRepository;
 
         public ScoreboardService(
+            IUnitOfWork unitOfWork, 
             IScoreboardRepository scoreboardRepository,
             IMonsterRepository monsterRepository
         )
         {
+            _unitOfWork = unitOfWork;
             _scoreboardRepository = scoreboardRepository;
             _monsterRepository = monsterRepository;
         }
@@ -25,10 +29,11 @@ namespace DL.Application.Scoreboards
         public Scoreboard CreateScoreboard()
         {
             Scoreboard scoreboard = null;
-            _scoreboardRepository.Worker(() => 
+            _unitOfWork.Worker(() => 
             {
                 scoreboard = new Scoreboard();
                 scoreboard = _scoreboardRepository.Add(scoreboard);
+                _unitOfWork.SaveChanges();
 
                 var monsters = _monsterRepository.All();
                 monsters.ForEach(monster => 
@@ -41,7 +46,7 @@ namespace DL.Application.Scoreboards
                 });
                 scoreboard = _scoreboardRepository.Update(scoreboard);
 
-                _scoreboardRepository.SaveChanges();
+                _unitOfWork.SaveChanges();
             });
             return scoreboard;
         }

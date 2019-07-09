@@ -10,14 +10,14 @@ namespace DL.Data.Monsters
     // Handle any complex persistence logic in your repository layer. Assumingly
     // for a simple CRUD implementation most of these would be pass throughs to
     // the base.
-    public class MonsterRepository : RepositoryBase<Monster>, IMonsterRepository
+    public class MonsterRepository : RepositoryBase, IMonsterRepository
     {
-        public MonsterRepository(IDbContextFactory dbContextFactory)
-            : base(dbContextFactory) {}
+        public MonsterRepository(IContextSessionProvider contextSessionProvider)
+            : base(contextSessionProvider) {}
 
         public Monster FindComplete(int id)
         {
-            return FindBy(
+            return FindBy<Monster>(
                 x => x.Id == id,
                 x => x.Rewards);
         }
@@ -25,7 +25,7 @@ namespace DL.Data.Monsters
         public List<Monster> All()
         {
             // NOTE: example of readonly use, not here for any particular reason.
-            return RetrieveReadonlyAll();
+            return RetrieveReadonlyAll<Monster>();
         }
 
         public Monster Add(Monster monster)
@@ -40,7 +40,7 @@ namespace DL.Data.Monsters
 
         public void Remove(int id)
         {
-            RemoveEntity(id);
+            RemoveEntity<Monster>(id);
         }
 
         public void RemoveRange(List<Monster> monsters)

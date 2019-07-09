@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using DL.Application.Domain.Monsters;
+using DL.Application.Infrastructure;
 using DL.Application.Monsters;
 using DL.Tests.Infrastructure.TestBases;
 using FluentAssertions;
@@ -15,11 +16,12 @@ namespace DL.Tests.Application.Monsters
         [TestCleanup]
         public void AfterEach()
         {
+            var unitOfWork = Resolve<IUnitOfWork>();
             var repository = Resolve<IMonsterRepository>();
-            repository.Worker(() => 
+            unitOfWork.Worker(() =>
             {
                 repository.RemoveRange(repository.All());
-                repository.SaveChanges();
+                unitOfWork.SaveChanges();
             });
         }
 
@@ -28,8 +30,9 @@ namespace DL.Tests.Application.Monsters
         {
             Arrange(() =>
             {
+                var unitOfWork = Resolve<IUnitOfWork>();
                 var repository = Resolve<IMonsterRepository>();
-                repository.Worker(() => 
+                unitOfWork.Worker(() =>
                 {
                     repository.Add(new Monster 
                     { 
@@ -40,7 +43,7 @@ namespace DL.Tests.Application.Monsters
                             new Reward { Name = "Gems", Value = 310 }
                         }
                     });
-                    repository.SaveChanges();
+                    unitOfWork.SaveChanges();
                 });
             });
 
@@ -56,12 +59,14 @@ namespace DL.Tests.Application.Monsters
         [TestMethod]
         public void Find_When_AllIsWell()
         {
+            var monsterId = 0;
             Arrange(() =>
             {
+                var unitOfWork = Resolve<IUnitOfWork>();
                 var repository = Resolve<IMonsterRepository>();
-                repository.Worker(() => 
+                unitOfWork.Worker(() =>
                 {
-                    repository.Add(new Monster 
+                    var monster = repository.Add(new Monster 
                     { 
                         Name = "Rawrgnar", 
                         Power = 99,
@@ -70,11 +75,12 @@ namespace DL.Tests.Application.Monsters
                             new Reward { Name = "Gems", Value = 310 }
                         }
                     });
-                    repository.SaveChanges();
+                    unitOfWork.SaveChanges();
+                    monsterId = monster.Id;
                 });
             });
 
-            var result = Act(() => SUT.Find(1));
+            var result = Act(() => SUT.Find(monsterId));
 
             Assert(() => 
             {
@@ -102,15 +108,16 @@ namespace DL.Tests.Application.Monsters
             int monsterId = 0;
             Arrange(() =>
             {
+                var unitOfWork = Resolve<IUnitOfWork>();
                 var repository = Resolve<IMonsterRepository>();
-                repository.Worker(() => 
+                unitOfWork.Worker(() =>
                 {
                     var monster = repository.Add(new Monster 
                     { 
                         Name = "Rawrgnar", 
                         Power = 99
                     });
-                    repository.SaveChanges();
+                    unitOfWork.SaveChanges();
                     monsterId = monster.Id;
                 });
             });
@@ -128,7 +135,6 @@ namespace DL.Tests.Application.Monsters
                 result.Rewards.First().Name.Should().Be("Coins", "reward did not have name set");
                 result.Rewards.First().Value.Should().Be(3, "reward did not have value set");
             });
-
         }
     }
 }

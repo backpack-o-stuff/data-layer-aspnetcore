@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using DL.Application.Domain.Monsters;
+using DL.Application.Infrastructure;
 
 namespace DL.Application.Monsters
 {
@@ -17,17 +18,22 @@ namespace DL.Application.Monsters
 
     public class MonsterService : IMonsterService
     {
+        private readonly IUnitOfWork _unitOfWork;
         private readonly IMonsterRepository _monsterRepository;
 
-        public MonsterService(IMonsterRepository monsterRepository)
+        public MonsterService(
+            IUnitOfWork unitOfWork,
+            IMonsterRepository monsterRepository
+        )
         {
+            _unitOfWork = unitOfWork;
             _monsterRepository = monsterRepository;
         }
 
         public Monster Find(int id)
         {
             Monster entity = null;
-            _monsterRepository.Worker(() => 
+            _unitOfWork.Worker(() => 
             {
                 entity = _monsterRepository.FindComplete(id);
             });
@@ -37,7 +43,7 @@ namespace DL.Application.Monsters
         public List<Monster> All()
         {
             List<Monster> monsters = null;
-            _monsterRepository.Worker(() => 
+            _unitOfWork.Worker(() => 
             {
                 monsters = _monsterRepository.All();
             });
@@ -47,10 +53,10 @@ namespace DL.Application.Monsters
         public Monster Create(Monster monster)
         {
             Monster entity = null;
-            _monsterRepository.Worker(() => 
+            _unitOfWork.Worker(() => 
             {
                 entity = _monsterRepository.Add(monster);
-                _monsterRepository.SaveChanges();
+                _unitOfWork.SaveChanges();
             });
             return entity;
         }
@@ -58,22 +64,22 @@ namespace DL.Application.Monsters
         public Monster AddReward(int monsterId, Reward reward)
         {
             Monster monster = null;
-            _monsterRepository.Worker(() =>
+            _unitOfWork.Worker(() =>
             {
                 monster = _monsterRepository.FindComplete(monsterId);
                 monster.Rewards.Add(reward);
                 _monsterRepository.Update(monster);
-                _monsterRepository.SaveChanges();
+                _unitOfWork.SaveChanges();
             });
             return monster;
         }
 
         public void Remove(int id)
         {
-            _monsterRepository.Worker(() => 
+            _unitOfWork.Worker(() => 
             {
                 _monsterRepository.Remove(id);
-                _monsterRepository.SaveChanges();
+                _unitOfWork.SaveChanges();
             });
         }
     }
