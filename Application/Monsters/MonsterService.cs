@@ -58,7 +58,7 @@ namespace DL.Application.Monsters
         public Monster AddReward(int monsterId, Reward reward)
         {
             Monster monster = null;
-            _monsterRepository.Worker(() => 
+            _monsterRepository.Worker(() =>
             {
                 monster = _monsterRepository.FindComplete(monsterId);
                 monster.Rewards.Add(reward);
