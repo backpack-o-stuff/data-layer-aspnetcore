@@ -13,4 +13,4 @@ Data Layer practices and helpers in ASP.NET Core.
 ### Setup
 
 ##### EntityFramework Setup
-- Command line > Data.EF folder > Run: dotnet ef database update
+- Command line > Run: dotnet ef database update --project Data
