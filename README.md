@@ -2,7 +2,9 @@
 
 Data Layer practices and helpers in ASP.NET Core.
 
-* NOTE: Focus of this repository is to highlight the Data layer and how the others interact with it. Other layers may/will contain shortcuts.
+Focus of this repository is to highlight the Data layer and how the others interact with it. Other layers may/will contain shortcuts.
+
+This repository shows the Data Layer in a soft [onion architecture](https://jeffreypalermo.com/2008/07/the-onion-architecture-part-1/), but is by no means restricted to that.
 
 ---
 
@@ -14,3 +16,41 @@ Data Layer practices and helpers in ASP.NET Core.
 
 ##### EntityFramework Setup
 - Command line > Run: dotnet ef database update --project Data
+
+### Intent
+
+##### Database Bleedthrough
+
+While some databases/orms will force their needs to bleed out into the domain entities/models, this example highlights how controlling the data layer is to keep db specifics contained within.
+
+##### Where Is The Query Run?
+
+RepositoryBase deals in IQueryable while the Repository implementations ensure that the query has been run and return Lists.
+
+##### UnitOfWork Use
+
+The services in the application layer coordinates the unit of work, allowing the repositories to work together. Underneith the ContextSessionProvider is controlling the DbContext sharing.
+
+```
+Application/Scoreboards/ScoreboardService
+
+_unitOfWork.Worker(() => 
+{
+    scoreboard = new Scoreboard();
+    scoreboard = _scoreboardRepository.Add(scoreboard);
+    _unitOfWork.SaveChanges();
+
+    var monsters = _monsterRepository.All();
+    monsters.ForEach(monster => 
+    {
+        scoreboard.ScoreboardEntries.Add(new ScoreboardEntry
+        {
+            MonsterId = monster.Id,
+            PlayersDefeated = 0
+        });
+    });
+    scoreboard = _scoreboardRepository.Update(scoreboard);
+
+    _unitOfWork.SaveChanges();
+});
+```
