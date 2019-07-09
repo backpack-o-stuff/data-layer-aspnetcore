@@ -1,6 +1,6 @@
 ﻿using Newtonsoft.Json;
 
-namespace DL.Application.Domain.Scoreboards
+namespace DL.Domain.Scoreboards
 {
     public class ScoreboardEntry : IEntity
     {

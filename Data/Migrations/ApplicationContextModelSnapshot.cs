@@ -15,7 +15,7 @@ namespace DL.Data.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "2.2.4-servicing-10062");
 
-            modelBuilder.Entity("DL.Application.Domain.Monsters.Monster", b =>
+            modelBuilder.Entity("DL.Domain.Monsters.Monster", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -36,7 +36,7 @@ namespace DL.Data.Migrations
                     b.ToTable("monsters");
                 });
 
-            modelBuilder.Entity("DL.Application.Domain.Monsters.Reward", b =>
+            modelBuilder.Entity("DL.Domain.Monsters.Reward", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -63,7 +63,7 @@ namespace DL.Data.Migrations
                     b.ToTable("rewards");
                 });
 
-            modelBuilder.Entity("DL.Application.Domain.Scoreboards.Scoreboard", b =>
+            modelBuilder.Entity("DL.Domain.Scoreboards.Scoreboard", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -75,7 +75,7 @@ namespace DL.Data.Migrations
                     b.ToTable("scoreboards");
                 });
 
-            modelBuilder.Entity("DL.Application.Domain.Scoreboards.ScoreboardEntry", b =>
+            modelBuilder.Entity("DL.Domain.Scoreboards.ScoreboardEntry", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -101,17 +101,17 @@ namespace DL.Data.Migrations
                     b.ToTable("scoreboard_entries");
                 });
 
-            modelBuilder.Entity("DL.Application.Domain.Monsters.Reward", b =>
+            modelBuilder.Entity("DL.Domain.Monsters.Reward", b =>
                 {
-                    b.HasOne("DL.Application.Domain.Monsters.Monster", "Monster")
+                    b.HasOne("DL.Domain.Monsters.Monster", "Monster")
                         .WithMany("Rewards")
                         .HasForeignKey("MonsterId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 
-            modelBuilder.Entity("DL.Application.Domain.Scoreboards.ScoreboardEntry", b =>
+            modelBuilder.Entity("DL.Domain.Scoreboards.ScoreboardEntry", b =>
                 {
-                    b.HasOne("DL.Application.Domain.Scoreboards.Scoreboard", "Scoreboard")
+                    b.HasOne("DL.Domain.Scoreboards.Scoreboard", "Scoreboard")
                         .WithMany("ScoreboardEntries")
                         .HasForeignKey("ScoreboardId")
                         .OnDelete(DeleteBehavior.Cascade);

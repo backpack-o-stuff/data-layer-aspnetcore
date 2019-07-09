@@ -18,6 +18,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "RepositoryFiles", "Reposito
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data", "Data\Data.csproj", "{364C597A-1162-487F-B6D5-510740401F15}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{1A21802A-D115-4DF1-8F1D-423A58D599EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -40,6 +42,10 @@ Global
 		{364C597A-1162-487F-B6D5-510740401F15}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{364C597A-1162-487F-B6D5-510740401F15}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{364C597A-1162-487F-B6D5-510740401F15}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A21802A-D115-4DF1-8F1D-423A58D599EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A21802A-D115-4DF1-8F1D-423A58D599EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A21802A-D115-4DF1-8F1D-423A58D599EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A21802A-D115-4DF1-8F1D-423A58D599EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

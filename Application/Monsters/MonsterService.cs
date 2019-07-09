@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using DL.Application.Domain.Monsters;
 using DL.Application.Infrastructure;
+using DL.Domain.Monsters;
 
 namespace DL.Application.Monsters
 {

@@ -1,6 +1,6 @@
-﻿using DL.Application.Domain.Scoreboards;
-using DL.Application.Infrastructure;
+﻿using DL.Application.Infrastructure;
 using DL.Application.Monsters;
+using DL.Domain.Scoreboards;
 
 namespace DL.Application.Scoreboards
 {

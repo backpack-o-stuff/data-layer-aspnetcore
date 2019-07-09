@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using DL.Application.Domain.Monsters;
+using DL.Domain.Monsters;
 
 namespace DL.Application.Monsters
 {

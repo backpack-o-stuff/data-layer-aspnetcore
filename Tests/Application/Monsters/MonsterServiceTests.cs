@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using DL.Application.Domain.Monsters;
 using DL.Application.Infrastructure;
 using DL.Application.Monsters;
+using DL.Domain.Monsters;
 using DL.Tests.Infrastructure.TestBases;
 using FluentAssertions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;

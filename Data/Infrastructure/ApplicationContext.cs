@@ -1,8 +1,7 @@
-﻿using System;
-using DL.Application.Domain.Monsters;
-using DL.Application.Domain.Scoreboards;
-using DL.Data.Monsters;
+﻿using DL.Data.Monsters;
 using DL.Data.Scoreboards;
+using DL.Domain.Monsters;
+using DL.Domain.Scoreboards;
 using Microsoft.EntityFrameworkCore;
 
 namespace DL.Data.Infrastructure

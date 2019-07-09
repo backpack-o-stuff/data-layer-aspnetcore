@@ -2,17 +2,9 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
-    <AssemblyName>DL.Application</AssemblyName>
-    <RootNamespace>DL.Application</RootNamespace>
+    <AssemblyName>DL.Domain</AssemblyName>
+    <RootNamespace>DL.Domain</RootNamespace>
   </PropertyGroup>
-
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputPath></OutputPath>
-  </PropertyGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\Domain\Domain.csproj" />
-  </ItemGroup>
 
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">

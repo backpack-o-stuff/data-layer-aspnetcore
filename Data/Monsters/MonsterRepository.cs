@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
-using DL.Application.Domain.Monsters;
 using DL.Application.Monsters;
 using DL.Data.Infrastructure;
+using DL.Domain.Monsters;
 
 namespace DL.Data.Monsters
 {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DL.Application.Domain.Monsters
+namespace DL.Domain.Monsters
 {
     public class Monster : IEntity
     {

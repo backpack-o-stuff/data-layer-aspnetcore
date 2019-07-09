@@ -1,4 +1,4 @@
-﻿using DL.Application.Domain.Scoreboards;
+﻿using DL.Domain.Scoreboards;
 
 namespace DL.Application.Scoreboards
 {

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace DL.Application.Domain.Scoreboards
+namespace DL.Domain.Scoreboards
 {
     public class Scoreboard : IEntity
     {

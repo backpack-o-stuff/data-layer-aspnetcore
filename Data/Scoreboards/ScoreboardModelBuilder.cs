@@ -1,4 +1,4 @@
-﻿using DL.Application.Domain.Scoreboards;
+﻿using DL.Domain.Scoreboards;
 using Microsoft.EntityFrameworkCore;
 
 namespace DL.Data.Scoreboards
