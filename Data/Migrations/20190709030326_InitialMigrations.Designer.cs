@@ -8,8 +8,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DL.Data.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20190708235540_MonsterRewards")]
-    partial class MonsterRewards
+    [Migration("20190709030326_InitialMigrations")]
+    partial class InitialMigrations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -45,7 +45,9 @@ namespace DL.Data.Migrations
                         .HasColumnName("id")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("MonsterId");
+                    b.Property<int>("MonsterId")
+                        .HasColumnName("monster_id")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -63,11 +65,57 @@ namespace DL.Data.Migrations
                     b.ToTable("rewards");
                 });
 
+            modelBuilder.Entity("DL.Application.Domain.Scoreboards.Scoreboard", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("scoreboards");
+                });
+
+            modelBuilder.Entity("DL.Application.Domain.Scoreboards.ScoreboardEntry", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("id")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("MonsterId")
+                        .HasColumnName("monster_id")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("PlayersDefeated")
+                        .HasColumnName("players_defeated")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int>("ScoreboardId")
+                        .HasColumnName("scoreboard_id")
+                        .HasColumnType("INTEGER");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ScoreboardId");
+
+                    b.ToTable("scoreboard_entries");
+                });
+
             modelBuilder.Entity("DL.Application.Domain.Monsters.Reward", b =>
                 {
                     b.HasOne("DL.Application.Domain.Monsters.Monster", "Monster")
                         .WithMany("Rewards")
                         .HasForeignKey("MonsterId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                });
+
+            modelBuilder.Entity("DL.Application.Domain.Scoreboards.ScoreboardEntry", b =>
+                {
+                    b.HasOne("DL.Application.Domain.Scoreboards.Scoreboard", "Scoreboard")
+                        .WithMany("ScoreboardEntries")
+                        .HasForeignKey("ScoreboardId")
                         .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618

@@ -16,6 +16,11 @@ namespace DL.Data.Monsters
                 .IsRequired();
             entity.HasKey(x => x.Id);
 
+            entity.Property(x => x.MonsterId)
+                .HasColumnName("monster_id")
+                .HasColumnType("INTEGER")
+                .IsRequired();
+
             entity.Property(x => x.Name)
                 .HasColumnName("name")
                 .HasColumnType("VARCHAR(30)")

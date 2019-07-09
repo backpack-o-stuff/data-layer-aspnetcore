@@ -1,6 +1,8 @@
 ﻿using System;
 using DL.Application.Domain.Monsters;
+using DL.Application.Domain.Scoreboards;
 using DL.Data.Monsters;
+using DL.Data.Scoreboards;
 using Microsoft.EntityFrameworkCore;
 
 namespace DL.Data.Infrastructure
@@ -23,9 +25,13 @@ namespace DL.Data.Infrastructure
         {
             MonsterModelBuilder.Configure(modelBuilder);
             RewardModelBuilder.Configure(modelBuilder);
+            ScoreboardModelBuilder.Configure(modelBuilder);
+            ScoreboardEntryModelBuilder.Configure(modelBuilder);
         }
 
         public DbSet<Monster> Monsters { get; set; }
         public DbSet<Reward> Rewards { get; set; }
+        public DbSet<Scoreboard> Scoreboards { get; set; }
+        public DbSet<ScoreboardEntry> ScoreboardEntries { get; set; }
     }
 }
