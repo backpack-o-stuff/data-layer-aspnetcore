@@ -18,11 +18,7 @@
 
         public ApplicationContext ContextSession()
         {
-            if(_context == null)
-                _context = _dbContextFactory.For();
-            
-            return _context;
-            //return _context ?? (_context = _dbContextFactory.For());
+            return _context ?? (_context = _dbContextFactory.For());
         }
 
         public void Dispose()
