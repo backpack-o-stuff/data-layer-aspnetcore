@@ -60,7 +60,7 @@ _unitOfWork.Worker(() =>
 });
 ```
 
-#### Entity children fetching
+#### Entity Children Fetching
 
 By default this will not return an entities children, there are fetching overloads on the base repositories to help with this.
 
