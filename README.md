@@ -8,26 +8,31 @@ This repository shows the Data Layer in a soft [onion architecture](https://jeff
 
 ---
 
-### Built With
+## Setup
 
-- ASP.NET Core 2.2
+#### EntityFramework Setup
 
-### Setup
-
-##### EntityFramework Setup
 - Command line > Run: dotnet ef database update --project Data
 
-### Intent
+#### Built With
 
-##### Database Bleedthrough
+- ASP.NET Core 2.2
+- EntityFrameworkCore
+- Sqlite (For simplicity sake)
+
+---
+
+## Intent
+
+#### Database Bleedthrough
 
 While some databases/orms will force their needs to bleed out into the domain entities/models, this example highlights how controlling the data layer is to keep db specifics contained within.
 
-##### Where Is The Query Run?
+#### Where Is The Query Run?
 
 RepositoryBase deals in IQueryable while the Repository implementations ensure that the query has been run and return Lists.
 
-##### UnitOfWork Use
+#### UnitOfWork Use
 
 The services in the application layer coordinates the unit of work, allowing the repositories to work together. Underneith the ContextSessionProvider is controlling the DbContext sharing.
 
@@ -55,22 +60,20 @@ _unitOfWork.Worker(() =>
 });
 ```
 
-##### Entity children fetching
+#### Entity children fetching
 
 By default this will not return an entities children, there are fetching overloads on the base repositories to help with this.
 
+##### No Children
 ```
-No Children
-
 public Monster Find(int id)
 {
     return FindBy<Monster>(selectBy => selectBy.Id == id);
 }
 ```
 
+##### With Children
 ```
-With Children
-
 public Monster FindComplete(int id)
 {
     return FindBy<Monster>(
