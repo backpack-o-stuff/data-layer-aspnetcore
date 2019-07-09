@@ -54,3 +54,27 @@ _unitOfWork.Worker(() =>
     _unitOfWork.SaveChanges();
 });
 ```
+
+##### Entity children fetching
+
+By default this will not return an entities children, there are fetching overloads on the base repositories to help with this.
+
+```
+No Children
+
+public Monster Find(int id)
+{
+    return FindBy<Monster>(selectBy => selectBy.Id == id);
+}
+```
+
+```
+With Children
+
+public Monster FindComplete(int id)
+{
+    return FindBy<Monster>(
+        selectBy => selectBy.Id == id,
+        includeChildren => includeChildren.Rewards);
+}
+```

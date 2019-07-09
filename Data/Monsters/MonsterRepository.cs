@@ -25,8 +25,8 @@ namespace DL.Data.Monsters
         public Monster FindComplete(int id)
         {
             return FindBy<Monster>(
-                x => x.Id == id,
-                x => x.Rewards);
+                selectBy => selectBy.Id == id,
+                includeChildren => includeChildren.Rewards);
         }
 
         public List<Monster> All()
