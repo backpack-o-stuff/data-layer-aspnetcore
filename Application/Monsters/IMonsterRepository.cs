@@ -6,9 +6,10 @@ namespace DL.Application.Monsters
 {
     public interface IMonsterRepository : IRepositoryWorker
     {
-        Monster Find(int id);
+        Monster FindComplete(int id);
         List<Monster> All();
         Monster Add(Monster monster);
+        Monster Update(Monster monster);
         void Remove(int id);
         void RemoveRange(List<Monster> monsters);
     }

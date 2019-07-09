@@ -1,45 +1,51 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.Generic;
 using DL.Application.Domain.Monsters;
 using DL.Application.Monsters;
 using DL.Data.Infrastructure;
 
 namespace DL.Data.Monsters
 {
+    // INTENT
+    // expose only what your application needs not everything on the base.
+    // Handle any complex persistence logic in your repository layer. Assumingly
+    // for a simple CRUD implementation most of these would be pass throughs to
+    // the base.
     public class MonsterRepository : RepositoryBase<Monster>, IMonsterRepository
     {
         public MonsterRepository(IDbContextFactory dbContextFactory)
             : base(dbContextFactory) {}
 
-        public Monster Find(int id)
+        public Monster FindComplete(int id)
         {
-            return Context().Monsters.FirstOrDefault(x => x.Id == id);       
+            return FindBy(
+                x => x.Id == id,
+                x => x.Rewards);
         }
 
         public List<Monster> All()
         {
-            return Context().Monsters.ToList();
+            // NOTE: example of readonly use, not here for any particular reason.
+            return RetrieveReadonlyAll();
         }
 
         public Monster Add(Monster monster)
         {
-            Context().Monsters.Add(monster);       
-            return monster;
+            return AddEntity(monster);
+        }
+
+        public Monster Update(Monster monster)
+        {
+            return UpdateEntity(monster);
         }
 
         public void Remove(int id)
         {
-            var monster = Context().Monsters.FirstOrDefault(x => x.Id == id);
-            if(monster == null)
-                return;
-
-            Context().Monsters.Remove(monster);       
+            RemoveEntity(id);
         }
 
         public void RemoveRange(List<Monster> monsters)
         {
-            Context().Monsters.RemoveRange(monsters);       
+            RemoveEntityBy(monsters);
         }
     }
 }

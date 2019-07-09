@@ -33,7 +33,14 @@ namespace DL.ClientLayer.Controllers
         [HttpPost]
         public JsonResult AddMonster([FromBody] Monster monster)
         {
-            var model = _monsterService.Add(monster);
+            var model = _monsterService.Create(monster);
+            return Result(HttpStatusCode.OK, model);
+        }
+                
+        [HttpPost("{id}/rewards")]
+        public JsonResult AddMonsterReward(int id, [FromBody] Reward reward)
+        {
+            var model = _monsterService.AddReward(id, reward);
             return Result(HttpStatusCode.OK, model);
         }
                 

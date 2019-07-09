@@ -1,4 +1,5 @@
-﻿using DL.Application.Domain.Monsters;
+﻿using System;
+using DL.Application.Domain.Monsters;
 using DL.Data.Monsters;
 using Microsoft.EntityFrameworkCore;
 
@@ -21,8 +22,10 @@ namespace DL.Data.Infrastructure
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             MonsterModelBuilder.Configure(modelBuilder);
+            RewardModelBuilder.Configure(modelBuilder);
         }
 
         public DbSet<Monster> Monsters { get; set; }
+        public DbSet<Reward> Rewards { get; set; }
     }
 }

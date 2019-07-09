@@ -3,12 +3,12 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DL.Data.Monsters
 {
-    public static class MonsterModelBuilder
+    public class RewardModelBuilder
     {
         public static void Configure(ModelBuilder modelBuilder)
         {
-            var entity = modelBuilder.Entity<Monster>();
-            entity.ToTable("monsters");
+            var entity = modelBuilder.Entity<Reward>();
+            entity.ToTable("rewards");
 
             entity.Property(x => x.Id)
                 .HasColumnName("id")
@@ -21,14 +21,11 @@ namespace DL.Data.Monsters
                 .HasColumnType("VARCHAR(30)")
                 .IsRequired();
 
-            entity.Property(x => x.Power)
-                .HasColumnName("power")
+            entity.Property(x => x.Value)
+                .HasColumnName("value")
                 .HasColumnType("INTEGER")
                 .IsRequired();
-
-            entity.HasMany(x => x.Rewards)
-                .WithOne(c => c.Monster)
-                .HasForeignKey(x => x.MonsterId);
         }
+
     }
 }

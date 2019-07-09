@@ -10,7 +10,8 @@ namespace DL.Application.Monsters
     {
         Monster Find(int id);
         List<Monster> All();
-        Monster Add(Monster monster);
+        Monster Create(Monster monster);
+        Monster AddReward(int monsterId, Reward reward);
         void Remove(int id);
     }
 
@@ -28,7 +29,7 @@ namespace DL.Application.Monsters
             Monster entity = null;
             _monsterRepository.Worker(() => 
             {
-                entity = _monsterRepository.Find(id);
+                entity = _monsterRepository.FindComplete(id);
             });
             return entity;
         }
@@ -43,7 +44,7 @@ namespace DL.Application.Monsters
             return monsters;
         }
 
-        public Monster Add(Monster monster)
+        public Monster Create(Monster monster)
         {
             Monster entity = null;
             _monsterRepository.Worker(() => 
@@ -52,6 +53,19 @@ namespace DL.Application.Monsters
                 _monsterRepository.SaveChanges();
             });
             return entity;
+        }
+
+        public Monster AddReward(int monsterId, Reward reward)
+        {
+            Monster monster = null;
+            _monsterRepository.Worker(() => 
+            {
+                monster = _monsterRepository.FindComplete(monsterId);
+                monster.Rewards.Add(reward);
+                _monsterRepository.Update(monster);
+                _monsterRepository.SaveChanges();
+            });
+            return monster;
         }
 
         public void Remove(int id)
