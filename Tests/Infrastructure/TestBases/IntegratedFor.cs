@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using DL.ClientLayer.Infrastructure.IoC;
-using DL.Data.Infrastructure;
+using DL.Data.Infrastructure.ContextControl;
 using DL.Tests.Infrastructure.Fakes;
 using Microsoft.Extensions.DependencyInjection;
 

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using DL.Data.Infrastructure;
+using DL.Data.Infrastructure.ContextControl;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace DL.ClientLayer.Infrastructure.IoC
@@ -19,8 +19,8 @@ namespace DL.ClientLayer.Infrastructure.IoC
         public static void Register(IServiceCollection services)
         {
             RegisterStatelessDependencies(services);
-            RegisterStatefulScopedDependencies(services);
-            RegisterStatefulSingletonDependencies(services);
+            RegisterStatefulPerRequestDependencies(services);
+            RegisterStatefulAcrossAllRequestsDependencies(services);
         }
 
         public static T Resolve<T>()
@@ -38,8 +38,8 @@ namespace DL.ClientLayer.Infrastructure.IoC
             var services = new ServiceCollection();
 
             RegisterStatelessDependencies(services);
-            RegisterStatefulScopedDependencies(services);
-            RegisterStatefulSingletonDependencies(services);
+            RegisterStatefulPerRequestDependencies(services);
+            RegisterStatefulAcrossAllRequestsDependencies(services);
 
             registerResolverOverrides.ForEach(register => register(services));
 
@@ -60,14 +60,14 @@ namespace DL.ClientLayer.Infrastructure.IoC
         }
 
         // INTENT: make stateful dependencies stand out
-        private static void RegisterStatefulScopedDependencies(IServiceCollection services)
+
+        private static void RegisterStatefulPerRequestDependencies(IServiceCollection services)
         {
             // services.AddScoped<>();
             services.AddScoped<IContextSessionProvider, ContextSessionProvider>();
         }
 
-        // INTENT: make stateful dependencies stand out
-        private static void RegisterStatefulSingletonDependencies(IServiceCollection services)
+        private static void RegisterStatefulAcrossAllRequestsDependencies(IServiceCollection services)
         {
             // services.AddSingleton<>();
         }

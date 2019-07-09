@@ -4,13 +4,13 @@ using DL.Domain.Monsters;
 using DL.Domain.Scoreboards;
 using Microsoft.EntityFrameworkCore;
 
-namespace DL.Data.Infrastructure
+namespace DL.Data
 {
-    public class ApplicationContext : DbContext
+    public class ApplicationDbContext : DbContext
     {
         private readonly string _databaseConnectionString;
 
-        public ApplicationContext(string databaseConnectionString)
+        public ApplicationDbContext(string databaseConnectionString)
         {
             _databaseConnectionString = databaseConnectionString;
         }

@@ -1,22 +1,22 @@
-﻿namespace DL.Data.Infrastructure
+﻿namespace DL.Data.Infrastructure.ContextControl
 {
     public interface IContextSessionProvider
     {
-        ApplicationContext ContextSession();
+        ApplicationDbContext ContextSession();
         void Dispose();
     }
 
     public class ContextSessionProvider : IContextSessionProvider
     {
         private readonly IDbContextFactory _dbContextFactory;
-        private ApplicationContext _context;
+        private ApplicationDbContext _context;
 
         public ContextSessionProvider(IDbContextFactory dbContextFactory)
         {
             _dbContextFactory = dbContextFactory;
         }
 
-        public ApplicationContext ContextSession()
+        public ApplicationDbContext ContextSession()
         {
             return _context ?? (_context = _dbContextFactory.For());
         }

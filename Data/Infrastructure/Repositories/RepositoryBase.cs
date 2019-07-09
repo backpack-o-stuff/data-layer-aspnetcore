@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
+using DL.Data.Infrastructure.ContextControl;
 using DL.Domain;
 using Microsoft.EntityFrameworkCore;
 
-namespace DL.Data.Infrastructure
+namespace DL.Data.Infrastructure.Repositories
 {
     public class RepositoryBase
     {
@@ -16,7 +17,7 @@ namespace DL.Data.Infrastructure
             _contextSessionProvider = contextSessionProvider;
         }
 
-        protected ApplicationContext Context()
+        protected ApplicationDbContext Context()
         {
             return _contextSessionProvider.ContextSession();
         }
@@ -59,35 +60,35 @@ namespace DL.Data.Infrastructure
             return set.AsNoTracking().FirstOrDefault(selector);
         }
 
-        protected List<TEntity> RetrieveAll<TEntity>()
+        protected IQueryable<TEntity> RetrieveAll<TEntity>()
             where TEntity : class, IEntity
         {
             var dbSet = Context().Set<TEntity>();
-            return dbSet.ToList();
+            return dbSet;
         }
         
-        protected List<TEntity> RetrieveReadonlyAll<TEntity>()
+        protected IQueryable<TEntity> RetrieveReadonlyAll<TEntity>()
             where TEntity : class, IEntity
         {
             var dbSet = Context().Set<TEntity>();
-            return dbSet.AsNoTracking().ToList();
+            return dbSet.AsNoTracking();
         }
         
-        protected List<TEntity> RetrieveAllBy<TEntity>(Func<TEntity, bool> selector)
+        protected IQueryable<TEntity> RetrieveAllBy<TEntity>(Func<TEntity, bool> selector)
             where TEntity : class, IEntity
         {
             var dbSet = Context().Set<TEntity>();
-            return dbSet.Where(selector).ToList();
+            return dbSet.Where(selector).AsQueryable();
         }
         
-        protected List<TEntity> RetrieveReadonlyAllBy<TEntity>(Func<TEntity, bool> selector)
+        protected IQueryable<TEntity> RetrieveReadonlyAllBy<TEntity>(Func<TEntity, bool> selector)
             where TEntity : class, IEntity
         {
             var dbSet = Context().Set<TEntity>();
-            return dbSet.AsNoTracking().Where(selector).ToList();
+            return dbSet.AsNoTracking().Where(selector).AsQueryable();
         }
 
-        protected List<TEntity> RetrieveAllBy<TEntity>(
+        protected IQueryable<TEntity> RetrieveAllBy<TEntity>(
             Func<TEntity, bool> selector,
             params Expression<Func<TEntity, object>>[] includes
         )
@@ -96,10 +97,10 @@ namespace DL.Data.Infrastructure
             var dbSet = Context().Set<TEntity>();
             IQueryable<TEntity> set = includes.Aggregate<Expression<Func<TEntity, object>>, IQueryable<TEntity>>
                 (dbSet, (current, expression) => current.Include(expression));
-            return set.Where(selector).ToList();
+            return set.Where(selector).AsQueryable();
         }
 
-        protected List<TEntity> RetrieveReadonlyAllBy<TEntity>(
+        protected IQueryable<TEntity> RetrieveReadonlyAllBy<TEntity>(
             Func<TEntity, bool> selector,
             params Expression<Func<TEntity, object>>[] includes
         )
@@ -108,7 +109,7 @@ namespace DL.Data.Infrastructure
             var dbSet = Context().Set<TEntity>();
             IQueryable<TEntity> set = includes.Aggregate<Expression<Func<TEntity, object>>, IQueryable<TEntity>>
                 (dbSet, (current, expression) => current.Include(expression));
-            return set.AsNoTracking().Where(selector).ToList();
+            return set.AsNoTracking().Where(selector).AsQueryable();
         }
 
         protected TEntity AddEntity<TEntity>(TEntity entity)

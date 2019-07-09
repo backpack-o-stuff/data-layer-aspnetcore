@@ -1,7 +1,7 @@
 ﻿using System;
 using DL.Application.Infrastructure;
 
-namespace DL.Data.Infrastructure
+namespace DL.Data.Infrastructure.ContextControl
 {
     public class UnitOfWork : IUnitOfWork
     {
@@ -51,7 +51,7 @@ namespace DL.Data.Infrastructure
             Context().SaveChanges();
         }
 
-        private ApplicationContext Context()
+        private ApplicationDbContext Context()
         {
             return _contextSessionProvider.ContextSession();
         }

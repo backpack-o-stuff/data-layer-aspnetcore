@@ -1,10 +1,10 @@
 ﻿using DL.Application.Infrastructure;
 
-namespace DL.Data.Infrastructure
+namespace DL.Data.Infrastructure.ContextControl
 {
     public interface IDbContextFactory
     {
-        ApplicationContext For();
+        ApplicationDbContext For();
     }
 
     public class DbContextFactory : IDbContextFactory
@@ -18,10 +18,10 @@ namespace DL.Data.Infrastructure
             _settingsProvider = settingsProvider;
         }
 
-        public ApplicationContext For()
+        public ApplicationDbContext For()
         {
             var connectionString = _settingsProvider.DatabaseConnectionString();
-            return new ApplicationContext(connectionString);
+            return new ApplicationDbContext(connectionString);
         }
     }
 }

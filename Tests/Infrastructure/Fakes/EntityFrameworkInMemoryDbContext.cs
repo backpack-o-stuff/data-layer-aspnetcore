@@ -1,9 +1,9 @@
-﻿using DL.Data.Infrastructure;
+﻿using DL.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace DL.Tests.Infrastructure.Fakes
 {
-    public class EntityFrameworkInMemoryDbContext : ApplicationContext
+    public class EntityFrameworkInMemoryDbContext : ApplicationDbContext
     {
         private const string DB_NAME = "EF_INMEMORY_TEST_DB";
 
