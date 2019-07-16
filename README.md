@@ -18,7 +18,7 @@ This repository shows the Data Layer in a soft [onion architecture](https://jeff
 
 - ASP.NET Core 2.2
 - EntityFrameworkCore
-- Sqlite (For simplicity sake)
+- SQLite (For simplicity sake)
 
 ---
 
