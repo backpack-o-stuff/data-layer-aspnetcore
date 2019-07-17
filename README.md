@@ -1,4 +1,4 @@
-# data-layer-aspnetcore
+# data-layer-dotnetcore
 
 Data Layer practices and helpers in ASP.NET Core.
 
