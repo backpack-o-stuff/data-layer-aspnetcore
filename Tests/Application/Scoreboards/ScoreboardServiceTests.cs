@@ -17,7 +17,7 @@ namespace DL.Tests.Application.Scoreboards
         public void AfterEach()
         {
             var unitOfWork = Resolve<IUnitOfWork>();
-            var scoreboardRepository = Resolve<IMonsterRepository>();
+            var scoreboardRepository = Resolve<IScoreboardRepository>();
             var monsterRepository = Resolve<IMonsterRepository>();
             unitOfWork.Worker(() => 
             {
